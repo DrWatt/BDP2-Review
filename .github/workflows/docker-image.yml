@@ -17,4 +17,4 @@ jobs:
     - name: Build the Docker image
       run: docker build docker/ --file docker/Dockerfile --tag marcolorusso/jupyreview:$(date +%s)
     - name: Push the image to DockerHub
-      run: docker login -u marcolorusso -p ${{ secrets.DOCKER_TOKEN }} && docker push marcolorusso/jupyreview
+      run: docker login -u marcolorusso -p ${{ secrets.DOCKER_TOKEN }} && docker push marcolorusso/jupyreview:$(date +%s)
