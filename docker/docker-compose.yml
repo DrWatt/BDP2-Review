@@ -15,11 +15,11 @@ services:
                 image: marcolorusso/jupyreview
                 environment:
                         - JUPYTER_ENABLE_LAB=yes
-                          # - JUPYTER_TOKEN= asd
+                        - JUPYTER_TOKEN= asd
                         - CHOWN_HOME=yes
                         - CHOWN_HOME_OPTS= -R
                         - GEN_CERT=yes
-                        - NOTEBOOK_ARGS= --NotebookApp.password=asd
+                          #- NOTEBOOK_ARGS= --NotebookApp.password=asd
                 networks:
                         - bdp2-net-front
                         - bdp2-net-back
