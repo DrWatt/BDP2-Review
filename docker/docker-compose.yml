@@ -3,7 +3,7 @@ services:
         redis:
                 image: redis
                 networks:
-                        - bdp2-net
+                        - bdp2-net-back
                 user: "1000"
                 volumes:
                         - ~/review/BDP2-Review/work:/data
@@ -15,11 +15,14 @@ services:
                 image: marcolorusso/jupyreview
                 environment:
                         - JUPYTER_ENABLE_LAB=yes
-                        - JUPYTER_TOKEN= asd
+                          # - JUPYTER_TOKEN= asd
                         - CHOWN_HOME=yes
                         - CHOWN_HOME_OPTS= -R
+                        - GEN_CERT=yes
+                        - NOTEBOOK_ARGS= --NotebookApp.password=asd
                 networks:
-                        - bdp2-net
+                        - bdp2-net-front
+                        - bdp2-net-back
                 ports:
                         - 80:8888
                 user: root
@@ -28,7 +31,8 @@ services:
         portainer:
                 image: portainer/portainer-ce
                 networks:
-                        - bdp2-net
+                        - bdp2-net-front
+                        - bdp2-net-back
                 ports:
                         - 8000:8000
                         - 443:9443
@@ -40,4 +44,5 @@ services:
 volumes:
         portainer_data:
 networks:
-        bdp2-net:
+        bdp2-net-front:
+        bdp2-net-back:
