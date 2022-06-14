@@ -1,22 +1,5 @@
 version: '3'
 services:
-        jupyter:
-                depends_on: 
-                        - redis
-                image: marcolorusso/jupyreview
-                environment:
-                        - JUPYTER_ENABLE_LAB=yes
-                        - JUPYTER_TOKEN="asd"
-                        - CHOWN_HOME=yes
-                        - CHOWN_HOME_OPTS="-R"
-                networks:
-                        - bdp2-net
-                ports:
-                        - 80:8888
-                user: root
-                volumes:
-                        - ~/review/BDP2-Review/work:/home/jovyan
-
         redis:
                 image: redis
                 networks:
@@ -26,6 +9,22 @@ services:
                         - ~/review/BDP2-Review/work:/data
                 command:
                         - redis-server
+        jupyter:
+                depends_on: 
+                        - redis
+                image: marcolorusso/jupyreview
+                environment:
+                        - JUPYTER_ENABLE_LAB=yes
+                        - JUPYTER_TOKEN= asd
+                        - CHOWN_HOME=yes
+                        - CHOWN_HOME_OPTS= -R
+                networks:
+                        - bdp2-net
+                ports:
+                        - 80:8888
+                user: root
+                volumes:
+                        - ~/review/BDP2-Review/work:/home/jovyan
         portainer:
                 image: portainer/portainer-ce
                 networks:
@@ -37,8 +36,6 @@ services:
                 volumes:
                         - /var/run/docker.sock:/var/run/docker.sock
                         - portainer_data:/data
-
-
 
 volumes:
         portainer_data:
