@@ -30,5 +30,29 @@ Some notes on this command:
 - the port 8888 in the container is mapped to port 80 on the docker host using `-p`;
 - with `--network` a custom network bridge is specified
 
+### Using `docker-compose` to create an application stack
+
+Using `docker-compose` it is possible to create multiple containers linked together to provide a multi-container service, i.e. an _application stacks_.
+`docker-compose` works by parsing a text file, written in the YAML language. This file, which can be found in the [docker/](https://github.com/DrWatt/BDP2-Review/tree/main/docker)  folder, defines how our application stack is structured.
+
+This file describes three services:
+• The Jupyter custom image created using the `Dockerfile`.
+• The Redis image.
+• A Portainer image useful for managing containers via a web interface.
+
+Also volume bindings to the `work` directory are included, together with the creation of a Docker volume mounted on the Portainer container. 
+Two network bridges are declared in the file: a _backend_, which links the containers, and a _frontend_ used to access the containers from the outside world.
+The _jupyter-hub_ interface is accesible using the port 80, while Portainer via port 443. 
+In order to build and run the stack, the following command has to be issued:
+```
+docker-compose up -d
+```
+where the `-d` flag is used to run the stack in the background.
+Finally
+```
+docker-compose down
+```
+can be used to stop the application.
+
 
 
